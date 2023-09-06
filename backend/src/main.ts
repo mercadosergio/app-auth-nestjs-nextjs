@@ -5,6 +5,7 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.enableCors();
   const config = new DocumentBuilder()
     .setTitle('API REST DE USUARIOS')
     .setDescription('Funciones de control de usuarios y roles')
