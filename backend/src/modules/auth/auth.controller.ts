@@ -1,5 +1,5 @@
 import { ApiBearerAuth, ApiBody, ApiCreatedResponse, ApiForbiddenResponse, ApiTags } from '@nestjs/swagger';
-import { Controller, Post, Body, Get, UseGuards, Request } from '@nestjs/common';
+import { Controller, Post, Body, Get, UseGuards, Request, ValidationPipe } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register-auth-dto';
 import { LocalAuthGuard } from './guards/local-auth.guard';
@@ -14,7 +14,7 @@ export class AuthController {
   @Post('register')
   @ApiCreatedResponse({ description: 'The user has been registered.' })
   @ApiForbiddenResponse({ description: 'Forbidden.' })
-  register(@Body() registerDto: RegisterDto) {
+  register(@Body(new ValidationPipe()) registerDto: RegisterDto) {
     return this.authService.register(registerDto);
   }
 

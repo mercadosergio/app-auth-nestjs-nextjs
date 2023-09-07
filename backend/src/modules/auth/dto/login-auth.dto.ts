@@ -3,12 +3,12 @@ import { IsEmail, IsNotEmpty, IsString, MaxLength, MinLength } from "class-valid
 
 export class LoginDto {
     @ApiProperty()
-    @IsEmail()
-    @IsNotEmpty()
+    @IsEmail({}, { message: 'El formato del email no es válido' })
+    @IsNotEmpty({ message: 'El email no puede estar vacío' })
     email: string;
 
     @ApiProperty()
-    @IsNotEmpty()
+    @IsNotEmpty({ message: 'La contraseña no puede estar vacía' })
     @IsString()
     @MinLength(8)
     @MaxLength(100)
