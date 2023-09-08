@@ -10,7 +10,7 @@ export class LoginDto {
     @ApiProperty()
     @IsNotEmpty({ message: 'La contraseña no puede estar vacía' })
     @IsString()
-    @MinLength(8)
-    @MaxLength(100)
+    @MinLength(8, { message: 'La contraseña debe tener al menos 8 caracteres' })
+    @MaxLength(50, { message: 'La contraseña no puede superar los 50 catacteres' })
     password: string;
 }

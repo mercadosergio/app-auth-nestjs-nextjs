@@ -15,7 +15,7 @@ export default class UserSeeder implements Seeder {
 
         const userAdmin = {
             name: "Sergio",
-            email: "sergio@mail.com",
+            email: "sergio@smartinfo.com",
             username: "sergio1",
             password: await hash('1234567890', 10),
             biography: "This is my biography",

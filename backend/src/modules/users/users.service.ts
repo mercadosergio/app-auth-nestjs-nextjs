@@ -30,7 +30,7 @@ export class UsersService {
     newUser.biography = createUserDto.biography;
     newUser.gender = createUserDto.gender;
     newUser.role = role;
-    
+
     const save = await this.userRepository.save(newUser);
     delete newUser.password;
     return save;
@@ -43,8 +43,16 @@ export class UsersService {
     return users;
   }
 
+  async findNonAdminUsers() {
+    const allUsers = await this.userRepository.find({
+      relations: ['role']
+    });
+    const users = allUsers.filter((user) => user.role.id === 2);
+    return users;
+  }
+
   async findOne(id: number) {
-    const user = await this.userRepository.findOne({ where: { id } });
+    const user = await this.userRepository.findOne({ where: { id }, relations: ['role'] });
     if (!user) throw new NotFoundException('User dont exists');
     return user;
   }

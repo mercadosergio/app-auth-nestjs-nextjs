@@ -5,12 +5,14 @@ import { Repository } from 'typeorm';
 import { compare, hash } from 'bcryptjs';
 import { RegisterDto } from './dto/register-auth-dto';
 import { User } from '../users/entities/user.entity';
+import { RolesService } from '../roles/roles.service';
 
 @Injectable()
 export class AuthService {
 
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
+    private roleService: RolesService,
     private jwtService: JwtService
   ) { }
 
@@ -28,6 +30,8 @@ export class AuthService {
     newUser.phoneNumber = registerDto.phoneNumber;
     newUser.biography = registerDto.biography;
     newUser.gender = registerDto.gender;
+    const role = await this.roleService.findOne(2);
+    newUser.role = role;
     const save = await this.userRepository.save(newUser);
     delete newUser.password;
     return save;
@@ -36,6 +40,7 @@ export class AuthService {
   async validateUser(email: string, password: string) {
     const user = await this.userRepository
       .createQueryBuilder('user')
+      .leftJoinAndSelect('user.role', 'role')
       .addSelect('user.password')
       .where('user.email = :email', { email })
       .getOne();

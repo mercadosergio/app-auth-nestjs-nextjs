@@ -9,7 +9,6 @@ export class RegisterDto extends PartialType(LoginDto) {
     name: string;
 
     @ApiProperty()
-    @IsNotEmpty()
     @IsString()
     confirmPassword: string;
 

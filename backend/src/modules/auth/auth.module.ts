@@ -10,11 +10,13 @@ import { UsersModule } from '../users/users.module';
 import { LocalStrategy } from './strategies/local.strategy';
 import { keyNames } from 'src/config/environment.keys';
 import { JwtStrategy } from './strategies/jwt.strategy';
+import { RolesModule } from '../roles/roles.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([User]),
     UsersModule,
+    RolesModule,
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({
       inject: [ConfigService],
