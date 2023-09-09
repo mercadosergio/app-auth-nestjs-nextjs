@@ -30,5 +30,8 @@ git clone https://github.com/mercadosergio/app-auth-nestjs-nextjs.git
 ## Credenciales
 
 - Puesto que la forma de registrarse es de usuario común, para iniciar sesión con un admin, solo hay uno disponible, y sus credenciales son las siguientes:
+
   > email: sergio@smartinfo.com
   > password: 1234567890
+
+- Para tener un punto de vista desde un cliente registrese e inicie sesión con sus credenciales recien registradas.
