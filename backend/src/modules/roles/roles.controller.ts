@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Param, Delete, Put, UseGuards } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { RolesService } from './roles.service';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
@@ -13,6 +13,7 @@ import { RolesGuard } from '../auth/guards/roles.guard';
 export class RolesController {
   constructor(private readonly rolesService: RolesService) { }
 
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(AppRole.ADMIN)
   @Post()
@@ -20,6 +21,7 @@ export class RolesController {
     return this.rolesService.create(createRoleDto);
   }
 
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(AppRole.ADMIN)
   @Get()
@@ -27,6 +29,7 @@ export class RolesController {
     return this.rolesService.findAll();
   }
 
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(AppRole.ADMIN)
   @Get(':id')
@@ -34,6 +37,7 @@ export class RolesController {
     return this.rolesService.findOne(+id);
   }
 
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(AppRole.ADMIN)
   @Put(':id')
@@ -41,6 +45,7 @@ export class RolesController {
     return this.rolesService.update(+id, updateRoleDto);
   }
 
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(AppRole.ADMIN)
   @Delete(':id')
