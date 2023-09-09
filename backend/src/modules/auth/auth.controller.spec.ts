@@ -3,7 +3,8 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 
 describe('AuthController', () => {
-  let controller: AuthController;
+  let authController: AuthController;
+  let authService: AuthService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -11,10 +12,20 @@ describe('AuthController', () => {
       providers: [AuthService],
     }).compile();
 
-    controller = module.get<AuthController>(AuthController);
+    authController = module.get<AuthController>(AuthController);
+    authService = module.get<AuthService>(AuthService);
   });
 
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
+  describe('login', () => {
+    it('should login a user', async () => {
+      const user = { username: 'testuser', id: 1, email: 'test@mainModule.com', password: '1234567890' };
+      const request = { user };
+
+      jest.spyOn(authService, 'login').mockResolvedValue({ access_token: 'access_token' }); // Mock the login method
+
+      const result = await authController.login(request);
+
+      expect(result).toEqual('access-token');
+    });
   });
 });

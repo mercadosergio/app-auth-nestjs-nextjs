@@ -35,5 +35,4 @@ export class RegisterDto extends PartialType(LoginDto) {
     @IsString()
     @Length(1)
     gender: string;
-
 }
