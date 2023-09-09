@@ -1,0 +1,27 @@
+.table {
+	/*background-color: white;
+	*/
+	border-collapse: separate;
+	border-spacing: 0 2px;
+	font-size: 16px;
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+.table thead {
+	background-color: rgb(218, 214, 214);
+}
+
+.table tbody {
+	background-color: white;
+}
+
+.table tr {
+	padding: 7px 8px;
+}
+
+.table th,
+.table td {
+	text-align: left;
+	padding: 8px;
+}

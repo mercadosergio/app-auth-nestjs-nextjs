@@ -1,0 +1,88 @@
+.formSpace {
+    width: 33%;
+    height: 100%;
+    background-color: #fafafa;
+    padding: 20px 60px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0 20px 20px 0;
+    -webkit-border-radius: 0 20px 20px 0;
+    -moz-border-radius: 0 20px 20px 0;
+    -ms-border-radius: 0 20px 20px 0;
+    -o-border-radius: 0 20px 20px 0;
+    background: linear-gradient(to right,
+            rgba(245, 245, 245, 0.76),
+            rgba(245, 245, 245, 0.76)),
+        url(./../../../../public/smartinfo-banner2.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.logo {
+    margin: 0 auto;
+}
+
+.loginContainer {
+    width: 100%;
+    margin: 30px auto;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    margin: auto;
+}
+
+.formField {
+    display: flex;
+    flex-direction: column;
+    margin: 7px 0;
+}
+
+.formField label {
+    font-weight: 600;
+}
+
+.formField input {
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.formField input:focus {
+    border-color: #005baf;
+    border-width: 1px;
+}
+
+.loginButton {
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    background-color: #C8C8C8;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 10px 0;
+}
+
+.errors {
+    overflow: auto;
+}
+
+.errors ul {
+    overflow: hidden;
+    background-color: rgba(255, 179, 179, 0.356);
+    padding: 7px;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+    margin: 5px 0;
+}

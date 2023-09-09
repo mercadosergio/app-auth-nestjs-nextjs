@@ -1,0 +1,87 @@
+.formSpace {
+    width: 50%;
+    height: 100%;
+    background-color: #fafafa;
+    padding: 20px 60px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0 20px 20px 0;
+    -webkit-border-radius: 0 20px 20px 0;
+    -moz-border-radius: 0 20px 20px 0;
+    -ms-border-radius: 0 20px 20px 0;
+    -o-border-radius: 0 20px 20px 0;
+    background: linear-gradient(to right,
+            rgba(245, 245, 245, 0.76),
+            rgba(245, 245, 245, 0.76)),
+        url(./../../../../public/smartinfo-banner2.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.logo {
+    margin: 0 auto;
+}
+
+.form button {
+    height: 38px;
+    padding: 0 30px;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 38px;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form button:not([type="submit"]) {
+    background-color: transparent;
+    border: 1px solid #bbb;
+    color: #555;
+
+}
+
+.form button:not([type="submit"]):hover,
+.form button:not([type="submit"]):focus {
+    color: #333;
+    border-color: #888;
+    outline: 0;
+}
+
+.registerButton {
+    border: none;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    font-size: 11px;
+    font-weight: 550;
+    line-height: 38px;
+    min-width: 200px;
+    background-color: #C8C8C8;
+}
+
+.registerButton:hover,
+.registerButton:focus {
+    background-color: #b3b3b3;
+}
+
+.errors {
+    overflow: auto;
+}
+
+.errors ul {
+    overflow: hidden;
+    background-color: rgba(255, 179, 179, 0.356);
+    padding: 7px;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+    margin: 5px 0;
+}

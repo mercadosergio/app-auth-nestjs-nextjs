@@ -1,0 +1,39 @@
+.imageSection1 {
+	background: linear-gradient(
+		to right,
+		rgba(2, 133, 173, 0.87),
+		rgba(2, 105, 173, 0.87)
+	);
+	flex-grow: 1;
+	display: flex;
+}
+
+.backGround {
+	background: linear-gradient(
+			to right,
+			rgba(2, 105, 173, 0.479),
+			rgba(2, 105, 173, 0.479)
+		),
+		url(./../../public/smartinfo-banner1.png);
+	background-repeat: no-repeat;
+	background-position: right;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.homeSection {
+	padding: 0 7rem;
+}
+
+.homeContent {
+	display: flex;
+	flex-direction: column;
+}
+
+.title {
+	margin: 10px auto;
+	font-size: 60px;
+	color: #ffffff;
+}

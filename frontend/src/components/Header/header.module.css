@@ -1,0 +1,49 @@
+.header {
+	padding: 0 40px;
+	display: flex;
+}
+
+.navigation {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.profileMenu {
+	list-style: none;
+}
+
+.item {
+	display: flex;
+	align-items: center;
+}
+
+.menuOption {
+	background: none;
+	border: none;
+	font-size: 16px;
+	color: #fff;
+	transition: ease-out 1s;
+	-webkit-transition: ease-out 0.3s;
+	-moz-transition: ease-out 1s;
+	-ms-transition: ease-out 1s;
+	-o-transition: ease-out 1s;
+	border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	-ms-border-radius: 6px;
+	-o-border-radius: 6px;
+	padding: 7px 10px;
+	display: flex;
+	align-items: center;
+}
+
+.menuOption svg {
+	width: 20px;
+	margin-right: 5px;
+}
+
+.menuOption:hover {
+	background-color: #e4e4e471;
+}
