@@ -51,7 +51,7 @@ function LoginPage() {
 		const data = profileResponse.data
 		dispatch(setProfile(data))
 
-		router.push('/')
+		router.push('/home')
 	}
 
 	return (

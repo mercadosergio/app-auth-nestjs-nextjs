@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
+import { setProfile } from '@/redux/features/profileSlice'
+import axios from 'axios'
+import { API_URL } from '@/config/environment'
 import Logo from './../../../public/logo-smartinfo.svg'
 import styles from './header.module.css'
 
@@ -16,6 +19,15 @@ function Header() {
 		router.push('/auth/login')
 	}
 
+	if (status === 'authenticated') {
+		const profileResponse = axios.get(`${API_URL}/auth/profile`, {
+			headers: {
+				Authorization: `Bearer ${session.user?.access_token}`,
+			},
+		})
+		const data = profileResponse.data
+		dispatch(setProfile(data))
+	}
 
 	return (
 		<>
