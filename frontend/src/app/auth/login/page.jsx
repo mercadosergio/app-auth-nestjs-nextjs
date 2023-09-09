@@ -1,17 +1,15 @@
 'use client'
-import { setProfile } from '@/redux/features/profileSlice'
+
 import Image from 'next/image'
 import Link from 'next/link'
-import { useDispatch } from 'react-redux'
 import AuthTemplate from '@/components/AuthTemplate/AuthTemplate'
 import styles from './login.module.css'
 import { useRouter } from 'next/navigation'
-import { signIn, useSession } from 'next-auth/react'
+import { signIn } from 'next-auth/react'
 import { useState } from 'react'
 import Logo from './../../../../public/logo-smartinfo.svg'
 
 function LoginPage() {
-	const dispatch = useDispatch()
 
 	const [errors, setErrors] = useState([])
 	const [email, setEmail] = useState('')
@@ -41,15 +39,6 @@ function LoginPage() {
 			setErrors(responseNextAuth.error.split(','))
 			return
 		}
-		const session = useSession()
-
-		const profileResponse = await axios.get(`${API_URL}/auth/profile`, {
-			headers: {
-				Authorization: `Bearer ${session.user?.access_token}`,
-			},
-		})
-		const data = profileResponse.data
-		dispatch(setProfile(data))
 
 		router.push('/home')
 	}
@@ -88,7 +77,7 @@ function LoginPage() {
 						</div>
 
 						<button className={styles.loginButton} type='submit'>
-							Iniciar sesión
+							Sign in
 						</button>
 						{errors.length > 0 && (
 							<div className={styles.errors}>
@@ -102,7 +91,7 @@ function LoginPage() {
 							</div>
 						)}
 						<p>
-							¿No tienes cuenta? <Link href='/auth/register'>Registrate!</Link>
+							¿No tienes cuenta? <Link href='/auth/register'><span className={styles.registerLink}>Registrate!</span></Link>
 						</p>
 					</form>
 				</div>

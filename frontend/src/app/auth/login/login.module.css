@@ -86,3 +86,8 @@
     -o-border-radius: 6px;
     margin: 5px 0;
 }
+
+.registerLink {
+    color: #005baf;
+    font-weight: 600;
+}
