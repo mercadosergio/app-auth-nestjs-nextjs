@@ -34,6 +34,9 @@ const handler = NextAuth({
 
 				return session
 			},
+			callbacks: {
+				redirectTo: '/auth/login',
+			},
 		}),
 	],
 	callbacks: {

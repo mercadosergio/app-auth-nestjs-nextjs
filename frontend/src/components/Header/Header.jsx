@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
@@ -10,10 +10,12 @@ function Header() {
 	const profile = useSelector((state) => state.profile)
 	const { data: session, status } = useSession()
 	const router = useRouter()
+	const dispatch = useDispatch()
 
-	if (status === 'unauthenticated') {
+	if (!session) {
 		router.push('/auth/login')
 	}
+
 
 	return (
 		<>

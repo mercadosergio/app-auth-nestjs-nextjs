@@ -6,12 +6,15 @@ import { useSession } from 'next-auth/react'
 import dynamic from 'next/dynamic'
 import Loading from './loading'
 import Header from '@/components/Header/Header'
+import { useRouter } from 'next/router'
 
 function Home() {
 	const { data: session, status } = useSession()
-
+	const router = useRouter()
 	if (status == 'loading') return <Loading />
-
+	if (!session) {
+		router.push('/auth/login')
+	}
 	const UsersTable = dynamic(
 		() => import('./../components/UsersTable/UsersTable'),
 		{
