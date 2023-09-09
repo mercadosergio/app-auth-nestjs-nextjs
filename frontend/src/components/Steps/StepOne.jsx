@@ -26,7 +26,7 @@ function StepOne({ formData, setFormData }) {
 					onChange={handlePassword}
 					className=''
 					placeholder=''
-					type='text'
+					type='password'
 				/>
 			</div>
 			<div className={styles.formField}>
@@ -35,7 +35,7 @@ function StepOne({ formData, setFormData }) {
 					onChange={handleConfirmPassword}
 					className=''
 					placeholder=''
-					type='text'
+					type='password'
 				/>
 			</div>
 		</div>
