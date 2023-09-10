@@ -1,18 +1,27 @@
-import { useSession } from 'next-auth/react'
+'use client'
 import { useRouter } from 'next/navigation'
 import Loading from '../loading'
 import styles from './home.module.css'
 import dynamic from 'next/dynamic'
+import Header from '@/components/Header/Header'
+import Link from 'next/link'
+import { useAuth } from '@/hooks/useAuth'
+import { useEffect } from 'react'
 
 function Home() {
-	const { data: session, status } = useSession()
 	const router = useRouter()
 
-	if (status == 'loading') return <Loading />
+	const { sessionExists, getToken } = useAuth()
+	const isSession = sessionExists()
 
-	if (!session) {
-		router.push('/auth/login')
-	}
+	const accessToken = getToken()
+	
+	useEffect(() => {
+		if (!isSession) {
+			router.push('/auth/login')
+		}
+	}, [])
+
 	const UsersTable = dynamic(
 		() => import('./../../components/UsersTable/UsersTable'),
 		{
@@ -27,7 +36,7 @@ function Home() {
 				<section className={styles.homeSection}>
 					<div className={styles.homeContent}>
 						<h1 className={styles.title}>Welcome!!!</h1>
-						<UsersTable accessToken={session.user?.access_token} />
+						<UsersTable accessToken={accessToken} />
 					</div>
 					<Link href='/auth/register'>Ir a register</Link>
 				</section>

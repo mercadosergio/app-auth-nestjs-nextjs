@@ -1,19 +1,23 @@
 'use client'
 import { useRouter } from 'next/navigation'
-import Loading from './loading'
-import { useSession } from 'next-auth/react'
+import { useAuth } from '@/hooks/useAuth'
+import { useEffect } from 'react'
 
-function App() {
+function RoutePage() {
 	const router = useRouter()
-	const { data: session, status } = useSession()
 
-	if (!session) {
-		router.push('/auth/login')
-	} else {
-		router.push('/home')
-	}
+	const { sessionExists } = useAuth()
+	const isSession = sessionExists()
+	
+	useEffect(() => {
+		if (!isSession) {
+			router.push('/auth/login')
+		} else {
+			router.push('/home')
+		}
+	}, [])
 
-	return <Loading />
+	return <></>
 }
 
-export default App
+export default RoutePage

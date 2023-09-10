@@ -1,34 +1,26 @@
 import Link from 'next/link'
-import { useDispatch, useSelector } from 'react-redux'
-import { signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
-import { setProfile } from '@/redux/features/profileSlice'
-import axios from 'axios'
-import { API_URL } from '@/config/environment'
 import Logo from './../../../public/logo-smartinfo.svg'
 import styles from './header.module.css'
+import { useGetProfileQuery } from '@/redux/services/authApi'
+import Loading from '@/app/loading'
+import { useAuth } from '@/hooks/useAuth'
 
 function Header() {
-	const profile = useSelector((state) => state.profile)
-	const { data: session, status } = useSession()
+	const { logout } = useAuth()
 	const router = useRouter()
-	const dispatch = useDispatch()
 
-	if (!session) {
+	const { data, error, isLoading, isFetching } = useGetProfileQuery(null)
+
+	if (isLoading || isFetching) return <Loading />
+	if (error) return <span> Error de itercepción de datos</span>
+
+
+	const logOut = async () => {
+		await logout()
 		router.push('/auth/login')
 	}
-
-	if (status === 'authenticated') {
-		const profileResponse = axios.get(`${API_URL}/auth/profile`, {
-			headers: {
-				Authorization: `Bearer ${session.user?.access_token}`,
-			},
-		})
-		const data = profileResponse.data
-		dispatch(setProfile(data))
-	}
-
 	return (
 		<>
 			<header className={styles.header}>
@@ -37,15 +29,10 @@ function Header() {
 						<Image src={Logo} width={100} alt='Logo smart info' />
 					</Link>
 					<ul className={styles.profileMenu}>
-						<li children={styles.item}>
-							{status == 'authenticated' && (
-								<button
-									className={styles.menuOption}
-									onClick={() => {
-										signOut()
-										router.push('/auth/login')
-									}}
-								>
+						{data && <li className={styles.item}>{data.name}</li>}
+						{data && (
+							<li children={styles.item}>
+								<button className={styles.menuOption} onClick={logOut}>
 									<svg
 										fill='none'
 										stroke='currentColor'
@@ -62,8 +49,8 @@ function Header() {
 									</svg>
 									Logout
 								</button>
-							)}
-						</li>
+							</li>
+						)}
 					</ul>
 				</nav>
 			</header>

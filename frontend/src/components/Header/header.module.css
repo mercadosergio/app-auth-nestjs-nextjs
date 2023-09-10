@@ -12,18 +12,21 @@
 
 .profileMenu {
 	list-style: none;
+	display: flex;
+	gap: 7px;
 }
 
 .item {
 	display: flex;
 	align-items: center;
+	color: #fff;
 }
 
 .menuOption {
+	color: #fff;
 	background: none;
 	border: none;
 	font-size: 16px;
-	color: #fff;
 	transition: ease-out 1s;
 	-webkit-transition: ease-out 0.3s;
 	-moz-transition: ease-out 1s;

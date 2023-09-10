@@ -1,5 +1,4 @@
 'use client'
-import axios from 'axios'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Box from '@mui/material/Box'
@@ -10,7 +9,7 @@ import Button from '@mui/material/Button'
 import styles from '@/app/auth/register/register.module.css'
 import StepOne from './StepOne'
 import StepTwo from './StepTwo'
-import { API_URL } from '@/config/environment'
+import { useAuth } from '@/hooks/useAuth'
 
 const steps = ['Datos de la cuenta', 'Datos personales']
 
@@ -18,7 +17,8 @@ function MultiStepForm() {
 	const [activeStep, setActiveStep] = useState(0)
 	const [skipped, setSkipped] = useState(new Set())
 
-	const [errors, setErrors] = useState([])
+	const { errors, setErrors, register } = useAuth()
+	// const [errors, setErrors] = useState([])
 	const [formData, setFormData] = useState({
 		name: '',
 		biography: '',
@@ -32,41 +32,20 @@ function MultiStepForm() {
 
 	const router = useRouter()
 
-	const onRegister = async (event) => {
+	const signUp = async (event) => {
 		event.preventDefault()
 		setErrors([])
-
-		const dataRegister = formData
-		try {
-			const response = await axios.post(
-				`${API_URL}/auth/register`,
-				dataRegister,
-				{
-					headers: {
-						'Content-Type': 'application/json',
-					},
-				}
-			)
-			setFormData({
-				name: '',
-				biography: '',
-				email: '',
-				password: '',
-				confirmPassword: '',
-				phoneNumber: '',
-				gender: '',
-				username: '',
-			})
-		} catch (error) {
-			if (error.response && error.response.data) {
-				const validationErrors = error.response.data.message
-				setErrors(validationErrors)
-			} else {
-				console.log('Error de conexión: ', error.message)
-			}
-			return
-		}
-
+		register(formData)
+		setFormData({
+			name: '',
+			biography: '',
+			email: '',
+			password: '',
+			confirmPassword: '',
+			phoneNumber: '',
+			gender: '',
+			username: '',
+		})
 		router.push('/auth/login')
 	}
 
@@ -106,7 +85,7 @@ function MultiStepForm() {
 				})}
 			</Stepper>
 			{
-				<form className={styles.form} onSubmit={onRegister}>
+				<form className={styles.form} onSubmit={signUp}>
 					<h1>Registrarse</h1>
 					{activeStep == 0 && (
 						<StepOne formData={formData} setFormData={setFormData} />

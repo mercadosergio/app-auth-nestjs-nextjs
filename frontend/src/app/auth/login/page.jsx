@@ -5,17 +5,17 @@ import Link from 'next/link'
 import AuthTemplate from '@/components/AuthTemplate/AuthTemplate'
 import styles from './login.module.css'
 import { useRouter } from 'next/navigation'
-import { signIn } from 'next-auth/react'
 import { useState } from 'react'
 import Logo from './../../../../public/logo-smartinfo.svg'
+import { useAuth } from '@/hooks/useAuth'
 
 function LoginPage() {
-
-	const [errors, setErrors] = useState([])
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
 	const router = useRouter()
+
+	const { login, errors, setErrors } = useAuth()
 
 	const handleEmail = (event) => {
 		setEmail(event.target.value)
@@ -25,20 +25,24 @@ function LoginPage() {
 		setPassword(event.target.value)
 	}
 
-	const login = async (e) => {
+	const signIn = async (e) => {
 		e.preventDefault()
 		setErrors([])
 
-		const responseNextAuth = await signIn('credentials', {
-			email,
-			password,
-			redirect: false,
-		})
-
-		if (responseNextAuth?.error) {
-			setErrors(responseNextAuth.error.split(','))
-			return
+		if (email == '') {
+			if (!errors.includes('El campo email está vacío')) {
+				setErrors([...errors, 'El campo email está vacío'])
+				return
+			}
 		}
+		if (password == '') {
+			if (!errors.includes('El campo password está vacío')) {
+				setErrors([...errors, 'El campo password está vacío'])
+				return
+			}
+		}
+
+		await login(email, password)
 
 		router.push('/home')
 	}
@@ -53,7 +57,7 @@ function LoginPage() {
 					alt='Logo smart info'
 				/>
 				<div className={styles.loginContainer}>
-					<form className={styles.form} onSubmit={login}>
+					<form className={styles.form} onSubmit={signIn}>
 						<h1 className={styles.title}>Iniciar sesión</h1>
 
 						<div className={styles.formField}>
@@ -91,7 +95,10 @@ function LoginPage() {
 							</div>
 						)}
 						<p>
-							¿No tienes cuenta? <Link href='/auth/register'><span className={styles.registerLink}>Registrate!</span></Link>
+							¿No tienes cuenta?
+							<Link href='/auth/register'>
+								<span className={styles.registerLink}>Registrate!</span>
+							</Link>
 						</p>
 					</form>
 				</div>

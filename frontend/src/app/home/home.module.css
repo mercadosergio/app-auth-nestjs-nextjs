@@ -14,7 +14,7 @@
 			rgba(2, 105, 173, 0.479),
 			rgba(2, 105, 173, 0.479)
 		),
-		url(./../../public/smartinfo-banner1.png);
+		url(./../../../public/smartinfo-banner1.png);
 	background-repeat: no-repeat;
 	background-position: right;
 	height: 100%;
