@@ -33,6 +33,6 @@ export class RegisterDto extends PartialType(LoginDto) {
 
     @ApiProperty()
     @IsString()
-    @Length(1)
+    @MinLength(1, { message: 'Debe seleccionar un género' })
     gender: string;
 }
