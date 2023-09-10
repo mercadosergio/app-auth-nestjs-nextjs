@@ -53,7 +53,7 @@ export class UsersService {
 
   async findOne(id: number) {
     const user = await this.userRepository.findOne({ where: { id }, relations: ['role'] });
-    if (!user) throw new NotFoundException('User dont exists');
+    if (!user) throw new NotFoundException('El usuario no existe');
     return user;
   }
 

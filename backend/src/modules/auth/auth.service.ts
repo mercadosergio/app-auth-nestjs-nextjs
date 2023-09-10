@@ -45,10 +45,10 @@ export class AuthService {
       .where('user.email = :email', { email })
       .getOne();
 
-    if (!user) throw new NotFoundException('User dont exists');
+    if (!user) throw new NotFoundException('El usuario con ese email no existe');
 
     const isPasswordValid = await compare(password, user.password);
-    if (!isPasswordValid) throw new UnauthorizedException('Passwords dont match');
+    if (!isPasswordValid) throw new UnauthorizedException('Las credenciales no coinciden');
 
     delete user.password;
     return user;

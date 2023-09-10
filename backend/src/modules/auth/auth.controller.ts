@@ -1,5 +1,5 @@
 import { ApiBearerAuth, ApiBody, ApiCreatedResponse, ApiForbiddenResponse, ApiTags } from '@nestjs/swagger';
-import { Controller, Post, Body, Get, UseGuards, Request, ValidationPipe } from '@nestjs/common';
+import { Controller, Post, Body, Get, UseGuards, Request, ValidationPipe, UsePipes } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register-auth-dto';
 import { LocalAuthGuard } from './guards/local-auth.guard';
@@ -21,6 +21,7 @@ export class AuthController {
   @ApiBody({ type: LoginDto })
   @UseGuards(LocalAuthGuard)
   @Post('login')
+  @UsePipes(new ValidationPipe())
   async login(@Request() req) {
     return this.authService.login(req.user);
   }
