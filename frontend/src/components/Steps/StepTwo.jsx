@@ -1,8 +1,6 @@
-import { useState } from 'react'
 import styles from './steps.module.css'
 
 function StepTwo({ formData, setFormData }) {
-
 	const handleUsername = (event) => {
 		setFormData({ ...formData, username: event.target.value })
 	}
@@ -27,12 +25,19 @@ function StepTwo({ formData, setFormData }) {
 		<div className={styles.fieldsLayout2}>
 			<div className={`${styles.formField} ${styles.colFull}`}>
 				<label>Nombre:</label>
-				<input onChange={handleName} className='' placeholder='' type='text' />
+				<input
+					onChange={handleName}
+					value={formData.name}
+					className=''
+					placeholder=''
+					type='text'
+				/>
 			</div>
 			<div className={`${styles.formField} ${styles.colFull}`}>
 				<label>Biografía:</label>
 				<textarea
 					onChange={handleBiography}
+					value={formData.biography}
 					className=''
 					placeholder=''
 				></textarea>
@@ -66,6 +71,7 @@ function StepTwo({ formData, setFormData }) {
 				<label>Nombre de usuario:</label>
 				<input
 					onChange={handleUsername}
+					value={formData.username}
 					className=''
 					placeholder=''
 					type='text'
@@ -73,7 +79,13 @@ function StepTwo({ formData, setFormData }) {
 			</div>
 			<div className={styles.formField}>
 				<label>Teléfono:</label>
-				<input onChange={handlePhone} className='' placeholder='' type='text' />
+				<input
+					onChange={handlePhone}
+					value={formData.phoneNumber}
+					className=''
+					placeholder=''
+					type='text'
+				/>
 			</div>
 		</div>
 	)

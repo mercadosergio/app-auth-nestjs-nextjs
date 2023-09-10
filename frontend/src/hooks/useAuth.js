@@ -32,24 +32,6 @@ function useAuth() {
 		}
 	}
 
-	const register = async (formData) => {
-		try {
-			const response = await axios.post(`${authApiUrl}/register`, formData, {
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			})
-		} catch (error) {
-			if (error.response && error.response.data) {
-				const validationErrors = error.response.data.message
-				setErrors(validationErrors)
-			} else {
-				console.log('Error de conexión: ', error.message)
-			}
-			return
-		}
-	}
-
 	const sessionExists = () => {
 		const authSession = existsSessionToken()
 
@@ -72,7 +54,7 @@ function useAuth() {
 		destroySession()
 	}
 
-	return { login, logout, register, errors, setErrors, sessionExists, getToken }
+	return { login, logout, errors, setErrors, sessionExists, getToken }
 }
 
 export { useAuth }
