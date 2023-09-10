@@ -19,6 +19,8 @@ function MultiStepForm() {
 	const [skipped, setSkipped] = useState(new Set())
 
 	const [errors, setErrors] = useState([])
+	const [success, setSuccess] = useState(null)
+
 	const [formData, setFormData] = useState({
 		name: '',
 		biography: '',
@@ -57,6 +59,7 @@ function MultiStepForm() {
 				gender: '',
 				username: '',
 			})
+			setSuccess('Registro exisoto')
 		} catch (error) {
 			if (error.response && error.response.data) {
 				const validationErrors = error.response.data.message
@@ -143,6 +146,13 @@ function MultiStepForm() {
 										{(index += 1)}. {error}
 									</li>
 								))}
+							</ul>
+						</div>
+					)}
+					{success && (
+						<div className={styles.success}>
+							<ul>
+								<li>{success}</li>
 							</ul>
 						</div>
 					)}
